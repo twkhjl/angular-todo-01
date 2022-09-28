@@ -1,0 +1,44 @@
+
+  <td class="py-2 mx-auto">{{ i+1 }}</td>
+
+  <ng-container *ngIf="!editable">
+    <td class="{{ todo.isCompleted ?'line-through':'' }}">
+      <span class="cursor-pointer"
+      (click)="todo.isCompleted = !todo.isCompleted">
+        {{ todo.name }}
+      </span>
+    </td>
+
+    <td class="text-center cursor-pointer"
+    (click)="editable=!editable">
+      <span class="text-2xl text-yellow-700">
+        <i class="fa-regular fa-pen-to-square"></i>
+      </span>
+    </td>
+    <td class="text-red-600 text-center cursor-pointer"
+    (click)="remove.emit()">
+      <span class="text-2xl text-red-700" >
+        <i class="fa-solid fa-trash"></i>
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container *ngIf="editable">
+    <td class="{{ todo.isCompleted ?'line-through':'' }} cursor-pointer">
+      <input type="text" [value]="todo.name" #editedItem>
+    </td>
+
+    <td class="text-center cursor-pointer"
+    (click)="saveTodo(editedItem.value)">
+      <span class="text-2xl font-extrabold">
+        <i class="fa-solid fa-check"></i>
+      </span>
+    </td>
+    <td class="text-red-600 text-center cursor-pointer"
+    (click)="editable=!editable">
+      <span class="text-2xl font-extrabold">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+      </span>
+    </td>
+  </ng-container>
+
